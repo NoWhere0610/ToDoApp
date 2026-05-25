@@ -1,6 +1,10 @@
 import { Form, Input, Button, message } from 'antd';
 import { useNavigate, Link } from "react-router-dom";
 
+message.config({
+  maxCount: 1
+})
+
 export default function Register() {
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -35,8 +39,7 @@ export default function Register() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-center text-2xl font-bold mb-6">Đăng Ký Tài Khoản</h2>
-        
+        <h2 className="text-center text-2xl font-bold mb-6">Đăng Ký Tài Khoản</h2>        
         <Form
           form={form}
           name="register_form"
@@ -98,8 +101,8 @@ export default function Register() {
             </Button>
           </Form.Item>
 
-          <div className="text-center text-sm text-gray-600 mt-4">
-            Đã có tài khoản?{" "}
+          <div className="text-center text-sm text-gray-600 mt-4 flex justify-center">
+            <p className='mr-2'>Đã có tài khoản?</p>
             <Link to="/login" className="text-blue-600 hover:underline">
               Đăng nhập ngay
             </Link>

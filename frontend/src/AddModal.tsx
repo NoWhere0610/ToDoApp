@@ -14,6 +14,11 @@ import type { CheckboxGroupProps } from "antd/es/checkbox";
 
 const { TextArea } = Input;
 
+message.config({
+  maxCount: 1
+})
+
+
 interface AddModalProps {
   onTaskAdded?: () => void;
 }

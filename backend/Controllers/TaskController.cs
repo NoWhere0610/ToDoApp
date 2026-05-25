@@ -64,12 +64,9 @@ public class TaskController : ControllerBase
             {
                 return BadRequest("Task data is null.");
             }
-
             newTask.User = null;
-
             _context.Tasks.Add(newTask);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction(nameof(GetTaskById), new { id = newTask.Id }, newTask);
         }
         catch (Exception ex)

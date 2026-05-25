@@ -1,9 +1,14 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
+import { Link } from "react-router";
 
 interface LoginProps {
   setToken: Dispatch<SetStateAction<string | undefined>>;
 }
+
+message.config({
+  maxCount: 1,
+});
 
 export default function Login({ setToken }: LoginProps) {
   const onFinish = async (values: any) => {
@@ -23,7 +28,7 @@ export default function Login({ setToken }: LoginProps) {
         const data = await response.json();
         setToken(data.token);
       } else {
-        alert("Đăng nhập thất bại");
+        message.error("Email hoặc mật khẩu không chính xác");
       }
     } catch (error) {
       console.error("Lỗi kết nối API:", error);
@@ -34,7 +39,6 @@ export default function Login({ setToken }: LoginProps) {
     <div className="flex min-h-screen items-center justify-center bg-gray-50">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-center text-2xl font-bold mb-6">Đăng Nhập</h2>
-
         <Form
           name="login_form"
           initialValues={{ remember: true }}
@@ -58,19 +62,22 @@ export default function Login({ setToken }: LoginProps) {
           </Form.Item>
 
           <Form.Item className="mb-0">
-            <div className="flex justify-center">
-              <Button type="primary" htmlType="submit" size="large" block className="mr-5">
-                Đăng nhập
-              </Button>
-              <Button
-                type="primary"
-                htmlType="submit"
-                size="large"
-                block
-                href="http://localhost:5173/register"
-              >Đăng ký</Button>
-            </div>
+            <Button
+              type="primary"
+              htmlType="submit"
+              size="large"
+              block
+              className="mr-5"
+            >
+              Đăng nhập
+            </Button>
           </Form.Item>
+          <div className="text-center text-sm text-gray-600 mt-4 flex justify-center">
+            <p className='mr-2'>Chưa có tài khoản?</p>
+            <Link to="/register" className="text-blue-600 hover:underline">
+              Đăng ký ngay
+            </Link>
+          </div>
         </Form>
       </div>
     </div>

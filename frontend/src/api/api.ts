@@ -25,21 +25,22 @@ export interface TaskItem {
 }
 
 const API_BASE_URL = "http://localhost:5069/api";
-
+const token = localStorage.getItem("token");
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`
   },
 });
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+// api.interceptors.request.use((config) => {
+//   const token = localStorage.getItem("token");
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+//   return config;
+// });
 
 export const taskApi = {
   getAllTasks: async (): Promise<TaskItem[]> => {
@@ -62,6 +63,7 @@ export const taskApi = {
     });
     return response.json();
   },
+
   createTask: async (taskData: Partial<TaskItem>): Promise<TaskItem> => {
     const response = await api.post<TaskItem>("/task", taskData);
     return response.data;
