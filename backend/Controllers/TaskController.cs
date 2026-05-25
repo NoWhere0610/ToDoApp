@@ -1,15 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace ToDoApi.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class TaskController : ControllerBase
 {
-    private readonly TaskContext _context;
+    private readonly AppDbContext _context;
 
-    public TaskController(TaskContext context)
+    public TaskController(AppDbContext context)
     {
         _context = context;
     }

@@ -1,15 +1,17 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ToDoApi.Controllers;
 
 [ApiController]
+[Authorize]
 [Route ("api/[controller]")]
 public class CategoryController : ControllerBase
 {
-    private readonly CategoryContext _context;
+    private readonly AppDbContext _context;
 
-    public CategoryController(CategoryContext context)
+    public CategoryController(AppDbContext context)
     {
         _context = context;
     }

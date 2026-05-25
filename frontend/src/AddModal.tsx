@@ -139,7 +139,7 @@ export const AddModal: React.FC<AddModalProps> = ({ onTaskAdded }) => {
             <DatePicker
               onChange={(date, dateString) => {
                 setExpireDate(dateString);
-              }}
+              }}  
             ></DatePicker>
           </div>
           <div>
